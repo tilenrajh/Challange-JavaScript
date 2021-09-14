@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
 const fs = require('fs');
-const { title } = require("process");
 
 const PAGE_URL =
   "https://www.hansimmo.be/appartement-te-koop-in-borgerhout/10161";
@@ -14,21 +13,17 @@ const main = async () => {
   const items = await page.evaluate(() => {
     // write your querySelectors here
 
-    if(document.querySelector('body > main > section#detail-description > article > div#description')){
-      description = document.querySelector('body > main > section#detail-description > article > div#description').textContent;
-    }else{ description = '';}
+    let description = document.querySelector('body > main > section#detail-description > article > div#description');
+    (description) ? description=description.textContent : description='';
 
-    if(document.querySelector('body > main > section#detail-description > article > h2')){
-      title = document.querySelector('body > main > section#detail-description > article > h2').textContent;
-    }else{ title = '';}
+    let title = document.querySelector('body > main > section#detail-description > article > h2');
+    (title) ? title=title.textContent : title='';
 
-    if(document.querySelector('body > main > section#detail-description > article > div#detail-title > div.price')){
-      price = document.querySelector('body > main > section#detail-description > article > div#detail-title > div.price').textContent;
-    }else{ price = '';}
+    let price = document.querySelector('body > main > section#detail-description > article > div#detail-title > div.price');
+    (price) ? price=price.textContent : price='';
 
-    if(document.querySelector('body > main > section#detail-description > article > div#detail-title > div.address')){
-      address = document.querySelector('body > main > section#detail-description > article > div#detail-title > div.address').textContent;
-    }else{ address = '';}
+    let address = document.querySelector('body > main > section#detail-description > article > div#detail-title > div.address');
+    (address) ? address=address.textContent : address='';
 
     return {
       description: description,
